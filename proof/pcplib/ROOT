@@ -1,0 +1,6 @@
+session "PCPLib" = "PCPDef" + 
+    options [document = pdf, document_output = "output"]
+    theories
+        NFA PCPNFA
+    document_files
+        "root.tex"
