@@ -4,7 +4,7 @@ use pcp_solver::infix_prefix_suffix_method::infix_prefix_suffix_method;
 
 fn main() {
     let mut input = String::new();
-    println!("Enter a PCP instance (e.g. '01_1__1_1101__111_1'):");
+    println!("Enter a PCP instance (e.g. '1111_1__1_100__0_1'):");
 
     std::io::stdin().read_line(&mut input).unwrap();
     let pcp = PCP::parse_repr(input.trim());

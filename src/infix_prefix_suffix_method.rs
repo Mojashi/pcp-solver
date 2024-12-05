@@ -1010,35 +1010,3 @@ pub fn infix_prefix_suffix_method(pcp: PCP) -> (bool, PCPConfDepGraph) {
         return (true, inv_aut);
     }
 }
-
-pub fn infix_prefix_suffix_method_find_closed_me(pcp: PCP, max_loop_count: usize) -> Vec<MidExactSequence> {
-    let mut g: Graph = Graph::new(pcp.clone());
-    g.add_safe_oracle(&&PCPSequence::Exact(ExactSequence {
-        seq: "0".to_string(),
-        dir: PCPDir::DN,
-    }));
-    println!(
-        "{:?}",
-        g.starts
-            .iter()
-            .map(|s| g.nodes[*s].seq.clone())
-            .collect_vec()
-    );
-
-    let mut mes: HashSet<MidExactSequence> = HashSet::new();
-    let mut loopcount = 0;
-    while !g.step() {
-        loopcount += 1;
-
-        if loopcount % 100 == 0 {
-            mes.extend(g.find_closed_me_components().into_iter());
-        }
-
-        if loopcount == max_loop_count {
-            break;
-        }
-    }
-
-    mes.extend(g.find_closed_me_components().into_iter());
-    mes.into_iter().collect()
-}
